@@ -12,8 +12,8 @@ feature "the signup process" do
 
     before(:each) do
      visit new_user_url
-     fill_in 'username', :with => "testing_username"
-     fill_in 'password', :with => "capybara"
+     fill_in 'Username', :with => "testing_username"
+     fill_in 'Password', :with => "capybara"
      click_on "Create User"
     end
 
@@ -22,5 +22,5 @@ feature "the signup process" do
     end
 
   end
-  
+
 end
