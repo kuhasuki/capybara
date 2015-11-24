@@ -3,17 +3,9 @@
   <h3>My Public Goals</h3>
 <% @users_goals.each do |goal| %>
   <% next if goal.hidden == true %>
-  <h3><%= goal.goal_title %></h3>
-  <span>
-    Progress:
-    <br>
-    <% goal.completion.times do |percentage| %>
-      |
-    <% end %>
-  </span>
+  <%= render "goal_guts", goal: goal %>
   <% if @user == current_user %>
-    <%= button_to "Edit Goal", edit_goal_url(goal), method: :get %>
-    <%= button_to "Delete Goal", goal_url(goal), method: :delete %>
+    <%= render "buttons", goal: goal %>
   <% end %>
 <% end %>
 <% if @user == current_user %>
@@ -21,16 +13,8 @@
     <h3>My Private Goals</h3>
     <% @users_goals.each do |goal| %>
       <% next if goal.hidden == false %>
-      <h3><%= goal.goal_title %></h3>
-      <span style="<%= goal.completion == 100 ? "color:#00FF00" : "" %>">
-        Progress:
-        <br>
-        <% goal.completion.times do |percentage| %>
-          |
-        <% end %>
-      </span>
-        <%= button_to "Edit Goal", edit_goal_url(goal), method: :get %>
-        <%= button_to "Delete Goal", goal_url(goal), method: :delete %>
+      <%= render "goal_guts", goal: goal %>
+      <%= render "buttons", goal: goal %>
     <% end %>
   <% end %>
   <br>
@@ -39,6 +23,3 @@
 
 <br>
 <br>
-<% if logged_in? %>
-  <%= button_to "Sign out", session_url, method: :delete %>
-<% end %>

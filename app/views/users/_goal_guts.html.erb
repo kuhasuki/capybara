@@ -1,0 +1,8 @@
+<h3><%= goal.goal_title %></h3>
+<span style="<%= goal.completion == 100 ? "color:#00FF00" : "" %>">
+  Progress:
+  <br>
+  <% goal.completion.times do |percentage| %>
+    |
+  <% end %>
+</span>
