@@ -4,13 +4,18 @@ class User < ActiveRecord::Base
   attr_reader :password
   after_initialize :ensure_session_token
 
+  has_many :goals,
+    foreign_key: :user_id,
+    primary_key: :id,
+    class_name: "Goal"
+
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)
   end
 
   def self.find_by_credentials(username, password)
-    juser = User.find_by(:username, username)
+    juser = User.find_by(username: username)
     return nil unless juser && juser.is_password?(password)
     juser
   end

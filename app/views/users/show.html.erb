@@ -1,1 +1,43 @@
-<h1><%= current_user.username %></h1>
+<h1><%= "#{current_user.username}'s goals" %></h1>
+<% @users_goals.each do |goal| %>
+  <% next if goal.hidden == true %>
+  <h3>My Public Goals</h3>
+  <h3><%= goal.goal_title %></h3>
+  <span>
+    Progress:
+    <br>
+    <% goal.completion.times do |percentage| %>
+      |
+    <% end %>
+  </span>
+  <% if @user == current_user %>
+    <%= button_to "Edit Goal", edit_goal_url(goal), method: :get %>
+  <% end %>
+<% end %>
+<% if @users_goals.any? {|goal| goal.hidden == true} %>
+  <h3>My Private Goals</h3>
+  <% @users_goals.each do |goal| %>
+    <% next if goal.hidden == false %>
+    <h3><%= goal.goal_title %></h3>
+    <span>
+      Progress:
+      <br>
+      <% goal.completion.times do |percentage| %>
+        |
+      <% end %>
+    </span>
+    <% if @user == current_user %>
+      <%= button_to "Edit Goal", edit_goal_url(goal), method: :get %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% if current_user == @user %>
+<br>
+  <%= link_to "Set a New Goal", new_goal_url %>
+<% end %>
+<br>
+<br>
+<% if logged_in? %>
+  <%= button_to "Sign out", session_url, method: :delete %>
+<% end %>
