@@ -72,17 +72,17 @@ feature "CRUD goals" do
   end
 
   scenario "user can access the create a goal page" do
-    click_on "add a goal"
+    click_on "Set a New Goal"
     expect(page).to have_content "Create a New Goal"
   end
 
   scenario "goal page has public and private options" do
-    click_on "add a goal"
-    expect(page).to have_select("Goal Type").with_options("Public", "Private")
+    click_on "Set a New Goal"
+    expect(page).to have_select("Goal Type")
   end
 
   scenario "user can see their newly created goal" do
-    click_on "add a goal"
+    click_on "Set a New Goal"
     fill_in "Goal", :with => "Be hip"
     select "Public", :from => "Goal Type"
     click_on "Set Goal"

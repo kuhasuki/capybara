@@ -1,0 +1,30 @@
+<h3>Update Your Goal</h3>
+<% flash.each do |notice| %>
+  <p><%= notice %>
+<% end %>
+
+<form class="" action="<%= goal_url(@goal) %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <%= auth_token %>
+
+  <label>
+    Goal
+    <input type="text" name="goal[goal_title]" value="<%= @goal.goal_title %>">
+  </label>
+
+  <label>
+    Goal Type
+    <select class="" name="goal[hidden]">
+      <option value="<%= true %>">Private</option>
+      <option value="<%= false %>">Public</option>
+    </select>
+  </label>
+
+  <label>
+    Progress Percentage
+    <input type="text" name="goal[completion]" value=" <%= @goal.completion %>">
+  </label>
+
+  <input type="submit" value="Update Goal">
+
+</form>
